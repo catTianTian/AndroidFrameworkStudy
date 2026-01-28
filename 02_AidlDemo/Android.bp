@@ -1,0 +1,31 @@
+java_binary {
+    name: "MyAidlService",
+    srcs: [
+        "MyService.java",
+        "IMyAidlInterface.aidl",
+    ],
+    // 自动处理 AIDL 生成 java 代码
+    aidl: {
+        local_include_dirs: ["."],
+    },
+    // 指定 main class
+    main_class: "MyService",
+    // 需要链接的库，framework 包含了 ServiceManager 等核心类
+    libs: ["framework"],
+    // 指定编译为 dex，这样才能在 Android 上运行
+    installable: true,
+}
+
+java_binary {
+    name: "MyAidlClient",
+    srcs: [
+        "MyClient.java",
+        "IMyAidlInterface.aidl",
+    ],
+    aidl: {
+        local_include_dirs: ["."],
+    },
+    main_class: "MyClient",
+    libs: ["framework"],
+    installable: true,
+}
